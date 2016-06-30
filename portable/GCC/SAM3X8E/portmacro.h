@@ -85,13 +85,13 @@ extern "C" {
  */
 
 /* Type definitions. */
-#define portCHAR		/**/
-#define portFLOAT		/**/
-#define portDOUBLE		/**/
-#define portLONG		/**/
-#define portSHORT		/**/
-#define portSTACK_TYPE	/**/
-#define portBASE_TYPE	/**/
+#define portCHAR		/*NEEDS DEFINITION*/
+#define portFLOAT		/*NEEDS DEFINITION*/
+#define portDOUBLE		/*NEEDS DEFINITION*/
+#define portLONG		/*NEEDS DEFINITION*/
+#define portSHORT		/*NEEDS DEFINITION*/
+#define portSTACK_TYPE		/*NEEDS DEFINITION*/
+#define portBASE_TYPE		/*NEEDS DEFINITION*/
 
 typedef portSTACK_TYPE StackType_t;
 typedef short BaseType_t;
@@ -99,62 +99,42 @@ typedef unsigned short UBaseType_t;
 
 #if( configUSE_16_BIT_TICKS == 1 )
 	typedef uint16_t TickType_t;
-	#define portMAX_DELAY ( TickType_t ) 0xffff
+	#define portMAX_DELAY ( TickType_t ) /*NEEDS DEFINITION*/
 #else
 	typedef uint32_t TickType_t;
-	#define portMAX_DELAY ( TickType_t ) 0xffffffffUL
+	#define portMAX_DELAY ( TickType_t ) /*NEEDS DEFINITION*/
 #endif
 /*-----------------------------------------------------------*/
 
 /* Interrupt control macros. */
-#define portDISABLE_INTERRUPTS()	asm volatile ( "DINT" ); asm volatile ( "NOP" )
-#define portENABLE_INTERRUPTS()		asm volatile ( "EINT" ); asm volatile ( "NOP" )
+#define portDISABLE_INTERRUPTS()	/*NEEDS DEFINITION*/
+#define portENABLE_INTERRUPTS()		/*NEEDS DEFINITION*/
 /*-----------------------------------------------------------*/
 
 /* Critical section control macros. */
-#define portNO_CRITICAL_SECTION_NESTING		( ( uint16_t ) 0 )
+#define portNO_CRITICAL_SECTION_NESTING		( /*NEEDS DEFINITION*/ )
 
-#define portENTER_CRITICAL()													\
-{																				\
-extern volatile uint16_t usCriticalNesting;							\
-																				\
-	portDISABLE_INTERRUPTS();													\
-																				\
-	/* Now interrupts are disabled ulCriticalNesting can be accessed */			\
-	/* directly.  Increment ulCriticalNesting to keep a count of how many */	\
-	/* times portENTER_CRITICAL() has been called. */							\
-	usCriticalNesting++;														\
+#define portENTER_CRITICAL()		\
+{					\
+	/*NEEDS DEFINITION*/		\
 }
 
 #define portEXIT_CRITICAL()														\
-{																				\
-extern volatile uint16_t usCriticalNesting;							\
-																				\
-	if( usCriticalNesting > portNO_CRITICAL_SECTION_NESTING )					\
-	{																			\
-		/* Decrement the nesting count as we are leaving a critical section. */	\
-		usCriticalNesting--;													\
-																				\
-		/* If the nesting level has reached zero then interrupts should be */	\
-		/* re-enabled. */														\
-		if( usCriticalNesting == portNO_CRITICAL_SECTION_NESTING )				\
-		{																		\
-			portENABLE_INTERRUPTS();											\
-		}																		\
-	}																			\
+{									\
+	/*NEEDS DEFINITION*/						\
 }
 /*-----------------------------------------------------------*/
 
 /* Task utilities. */
 extern void vPortYield( void ) __attribute__ ( ( naked ) );
 #define portYIELD()			vPortYield()
-#define portNOP()			asm volatile ( "NOP" )
+#define portNOP()			/*NEEDS DEFINITION*/
 /*-----------------------------------------------------------*/
 
 /* Hardwware specifics. */
-#define portBYTE_ALIGNMENT			2
-#define portSTACK_GROWTH			( -1 )
-#define portTICK_PERIOD_MS			( ( TickType_t ) 1000 / configTICK_RATE_HZ )
+#define portBYTE_ALIGNMENT			/*NEEDS DEFINITION*/
+#define portSTACK_GROWTH			( /*NEEDS DEFINITION*/ )
+#define portTICK_PERIOD_MS			( /*NEEDS DEFINITION*/ )
 /*-----------------------------------------------------------*/
 
 /* Task function macros as described on the FreeRTOS.org WEB site. */
