@@ -100,6 +100,7 @@
 /* Scheduler includes. */
 #include "FreeRTOS.h"
 #include "task.h"
+#include "portable.h"
 
 /* Demo application includes. */
 #include "partest.h"
@@ -186,8 +187,8 @@ int main( void )
 
 static void vErrorChecks( void *pvParameters )
 {
-static volatile unsigned long ulDummyVariable = 3UL;
-TickType_t xDelayPeriod = mainNO_ERROR_CHECK_DELAY;
+	static volatile unsigned long ulDummyVariable = 3UL;
+	TickType_t xDelayPeriod = mainNO_ERROR_CHECK_DELAY;
 
 	/* Cycle for ever, delaying then checking all the other tasks are still
 	operating without error. */
@@ -223,8 +224,8 @@ TickType_t xDelayPeriod = mainNO_ERROR_CHECK_DELAY;
 
 static short prvCheckOtherTasksAreStillRunning( void )
 {
-static short sNoErrorFound = pdTRUE;
-static unsigned long ulLastIdleLoops = 0UL;
+	static short sNoErrorFound = pdTRUE;
+	static unsigned long ulLastIdleLoops = 0UL;
 
 	/* The demo tasks maintain a count that increments every cycle of the task
 	provided that the task has never encountered an error.  This function 
@@ -261,39 +262,13 @@ static unsigned long ulLastIdleLoops = 0UL;
 
 static void prvSetupHardware( void )
 {
-	/* Stop the watchdog. */
-	WDTCTL = WDTPW + WDTHOLD;
 
-	/* Setup DCO+ for ( xtal * D * (N + 1) ) operation. */
-	FLL_CTL0 |= DCOPLUS + XCAP18PF; 
-
-	/* X2 DCO frequency, 8MHz nominal DCO */
-	SCFI0 |= FN_4;                  
-
-	/* (121+1) x 32768 x 2 = 7.99 Mhz */
-	SCFQCTL = mainMAX_FREQUENCY;
-
-	/* Setup the IO as per the SoftBaugh demo for the same target hardware. */
-	P1SEL = 0x32;
-	P2SEL = 0x00;
-	P3SEL = 0x00;
-	P4SEL = 0xFC;
-	P5SEL = 0xFF;
 }
 /*-----------------------------------------------------------*/
 
 void vApplicationIdleHook( void );
 void vApplicationIdleHook( void )
 {
-	/* Simple put the CPU into lowpower mode. */
-	_BIS_SR( LPM3_bits );
-	ulIdleLoops++;
+
 }
 /*-----------------------------------------------------------*/
-
-
-
-
-
-
-

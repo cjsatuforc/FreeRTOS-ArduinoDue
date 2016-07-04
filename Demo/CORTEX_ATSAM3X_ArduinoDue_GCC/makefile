@@ -52,18 +52,20 @@
 #*/
 
 
-CC=msp430-gcc
-OBJCOPY=msp430-objcopy
+CC=arm-none-eabi-gcc
+#OBJCOPY=msp430-objcopy
 DEBUG=-g
 OPT=-Os
 WARNINGS=-Wall -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare \
-		-Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused
+	-Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused
 
-CFLAGS=-mmcu=msp430x449 $(OPT) $(DEBUG) -I. -I../../Source/include -I../Common/include -DGCC_MSP430 $(WARNINGS)
+# -mmcu=msp430x449
+# -D GCC_MSP430
+CFLAGS= $(OPT) $(DEBUG) -I. -I../Common/include -I../../Source/include -I../../Source/portable/GCC/SAM3X8E $(WARNINGS) --specs=nosys.specs
 
 # Setup paths to source code
 SOURCE_PATH = ../../Source
-PORT_PATH = ../../Source/portable/GCC/MSP430F449
+PORT_PATH = ../../Source/portable/GCC/SAM3X8E
 DEMO_PATH = ../Common/Minimal
 
 #

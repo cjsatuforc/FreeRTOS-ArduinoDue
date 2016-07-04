@@ -84,14 +84,17 @@ extern "C" {
  *-----------------------------------------------------------
  */
 
+#define NEEDS_DEF 1
+
 /* Type definitions. */
-#define portCHAR		/*NEEDS DEFINITION*/
-#define portFLOAT		/*NEEDS DEFINITION*/
-#define portDOUBLE		/*NEEDS DEFINITION*/
-#define portLONG		/*NEEDS DEFINITION*/
-#define portSHORT		/*NEEDS DEFINITION*/
-#define portSTACK_TYPE		/*NEEDS DEFINITION*/
-#define portBASE_TYPE		/*NEEDS DEFINITION*/
+/* CURRENTLY JUST PLACEHOLDERS -- NEED UPDATING */
+#define portCHAR		char
+#define portFLOAT		float
+#define portDOUBLE		double
+#define portLONG		long
+#define portSHORT		short
+#define portSTACK_TYPE		short
+#define portBASE_TYPE		short
 
 typedef portSTACK_TYPE StackType_t;
 typedef short BaseType_t;
@@ -99,10 +102,10 @@ typedef unsigned short UBaseType_t;
 
 #if( configUSE_16_BIT_TICKS == 1 )
 	typedef uint16_t TickType_t;
-	#define portMAX_DELAY ( TickType_t ) /*NEEDS DEFINITION*/
+	#define portMAX_DELAY ( TickType_t ) NEEDS_DEF
 #else
 	typedef uint32_t TickType_t;
-	#define portMAX_DELAY ( TickType_t ) /*NEEDS DEFINITION*/
+	#define portMAX_DELAY ( TickType_t ) NEEDS_DEF
 #endif
 /*-----------------------------------------------------------*/
 
@@ -132,9 +135,9 @@ extern void vPortYield( void ) __attribute__ ( ( naked ) );
 /*-----------------------------------------------------------*/
 
 /* Hardwware specifics. */
-#define portBYTE_ALIGNMENT			/*NEEDS DEFINITION*/
-#define portSTACK_GROWTH			( /*NEEDS DEFINITION*/ )
-#define portTICK_PERIOD_MS			( /*NEEDS DEFINITION*/ )
+#define portBYTE_ALIGNMENT			NEEDS_DEF
+#define portSTACK_GROWTH			NEEDS_DEF
+#define portTICK_PERIOD_MS			NEEDS_DEF
 /*-----------------------------------------------------------*/
 
 /* Task function macros as described on the FreeRTOS.org WEB site. */

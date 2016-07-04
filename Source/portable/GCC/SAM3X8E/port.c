@@ -99,7 +99,7 @@ extern volatile TCB_t * volatile pxCurrentTCB;
 /* 
  * Macro to save a task context to the task stack.
  */
-#define portSAVE_CONTEXT()				\
+#define portSAVE_CONTEXT(				\
 	/*NEEDS DEFINITION*/				\
 	);
 
@@ -107,7 +107,7 @@ extern volatile TCB_t * volatile pxCurrentTCB;
  * Macro to restore a task context from the task stack.  This is effectively
  * the reverse of portSAVE_CONTEXT().
  */
-#define portRESTORE_CONTEXT()			\
+#define portRESTORE_CONTEXT(			\
 	/*NEEDS DEFINITION*/			\
 	);
 /*-----------------------------------------------------------*/
@@ -127,12 +127,14 @@ static void prvSetupTimerInterrupt( void );
 StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters )
 {
 	/*NEEDS DEFINITION*/
+	return NULL;
 }
 /*-----------------------------------------------------------*/
 
 BaseType_t xPortStartScheduler( void )
 {
 	/*NEEDS DEFINITION*/
+	return NULL;
 }
 /*-----------------------------------------------------------*/
 
@@ -184,22 +186,22 @@ static void prvSetupTimerInterrupt( void )
 	 * the context is saved at the start of vPortYieldFromTick().  The tick
 	 * count is incremented after the context is saved.
 	 */
-	interrupt (TIMERA0_VECTOR) prvTickISR( void ) __attribute__ ( ( naked ) );
-	interrupt (TIMERA0_VECTOR) prvTickISR( void )
-	{
+	//interrupt (TIMERA0_VECTOR) prvTickISR( void ) __attribute__ ( ( naked ) );
+	//interrupt (TIMERA0_VECTOR) prvTickISR( void )
+	//{
 		/* Save the context of the interrupted task. */
-		portSAVE_CONTEXT();
+		//portSAVE_CONTEXT();
 
 		/* Increment the tick count then switch to the highest priority task
 		that is ready to run. */
-		if( xTaskIncrementTick() != pdFALSE )
-		{
-			vTaskSwitchContext();
-		}
+		//if( xTaskIncrementTick() != pdFALSE )
+		//{
+			//vTaskSwitchContext();
+		//}
 
 		/* Restore the context of the new task. */
-		portRESTORE_CONTEXT();
-	}
+		//portRESTORE_CONTEXT();
+	//}
 
 #else
 
@@ -208,11 +210,11 @@ static void prvSetupTimerInterrupt( void )
 	 * tick count.  We don't need to switch context, this can only be done by
 	 * manual calls to taskYIELD();
 	 */
-	interrupt (TIMERA0_VECTOR) prvTickISR( void );
-	interrupt (TIMERA0_VECTOR) prvTickISR( void )
-	{
-		xTaskIncrementTick();
-	}
+	//interrupt (TIMERA0_VECTOR) prvTickISR( void );
+	//interrupt (TIMERA0_VECTOR) prvTickISR( void )
+	//{
+		//xTaskIncrementTick();
+	//}
 #endif
 
 

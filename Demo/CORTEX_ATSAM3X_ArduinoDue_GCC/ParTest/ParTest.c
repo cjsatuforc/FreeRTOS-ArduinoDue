@@ -129,45 +129,7 @@ static void prvToggleOnBoardLED( void );
 
 void vParTestInitialise( void )
 {
-	/* Initialise the LCD hardware. */
 
-	/* Used for the onboard LED. */
-	P1DIR = 0x01;
-
-	// Setup Basic Timer for LCD operation
-	BTCTL = (LCD_DIV_64+0x23);
-
-	// Setup port functions
-	P1SEL = 0x32;
-	P2SEL = 0x00;
-	P3SEL = 0x00;
-	P4SEL = 0xFC;
-	P5SEL = 0xFF;
-	
-	/* Initialise all segments to off. */
-	LCDM1 = partstSEGMENTS_OFF;	
-	LCDM2 = partstSEGMENTS_OFF;	
-	LCDM3 = partstSEGMENTS_OFF;	
-	LCDM4 = partstSEGMENTS_OFF;	
-	LCDM5 = partstSEGMENTS_OFF;	
-	LCDM6 = partstSEGMENTS_OFF;	
-	LCDM7 = partstSEGMENTS_OFF;	
-	LCDM8 = partstSEGMENTS_OFF;	
-	LCDM9 = partstSEGMENTS_OFF;	
-	LCDM10 = partstSEGMENTS_OFF;	
-	LCDM11 = partstSEGMENTS_OFF;	
-	LCDM12 = partstSEGMENTS_OFF;	
-	LCDM13 = partstSEGMENTS_OFF;	
-	LCDM14 = partstSEGMENTS_OFF;	
-	LCDM15 = partstSEGMENTS_OFF;	
-	LCDM16 = partstSEGMENTS_OFF;	
-	LCDM17 = partstSEGMENTS_OFF;	
-	LCDM18 = partstSEGMENTS_OFF;	
-	LCDM19 = partstSEGMENTS_OFF;	
-	LCDM20 = partstSEGMENTS_OFF;	
-
-	/* Setup LCD control. */
-	LCDCTL = (LCDSG0_7|LCD4MUX|LCDON);
 }
 /*-----------------------------------------------------------*/
 
@@ -230,19 +192,7 @@ void vParTestToggleLED( unsigned portBASE_TYPE uxLED )
 
 static void prvToggleOnBoardLED( void )
 {
-static unsigned short sState = pdFALSE;
 
-	/* Toggle the state of the single genuine on board LED. */
-	if( sState )	
-	{
-		P1OUT |= mainON_BOARD_LED_BIT;
-	}
-	else
-	{
-		P1OUT &= ~mainON_BOARD_LED_BIT;
-	}
-
-	sState = !sState;
 }
 /*-----------------------------------------------------------*/
 
